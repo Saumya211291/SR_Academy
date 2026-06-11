@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" class="light">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SR Academy | Data & QA Excellence</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Complete Azure Data Engineering Bundle | Rs 399</title>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -12,16 +12,16 @@
                     colors: {
                         slate: {
                             800: '#1e293b',
-                            900: '#0f172a',
+                            900: '#0f172a'
                         },
                         indigo: {
                             500: '#6366f1',
-                            600: '#4f46e5',
+                            600: '#4f46e5'
                         },
                         emerald: {
                             500: '#10b981',
-                            600: '#059669',
-                        },
+                            600: '#059669'
+                        }
                     }
                 }
             }
@@ -36,201 +36,225 @@
             animation: fadeInUp 0.8s ease-out forwards;
         }
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        .delay-300 { animation-delay: 0.3s; }
-        .delay-600 { animation-delay: 0.6s; }
+        .delay-300 {
+            animation-delay: 0.3s;
+        }
+        .delay-600 {
+            animation-delay: 0.6s;
+        }
     </style>
 </head>
-<body class="bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-gray-100 font-sans">
-
-    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm shadow-md transition-colors duration-300">
-        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <img src="logo.png" alt="SR logo" class="h-10 w-auto md:h-12 object-contain bg-white rounded p-0.5">
-                <a href="#" class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
-                    Academy
-                </a>
-            </div>
-            
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#hero" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">Home</a>
-                <a href="#courses" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">Courses</a>
-                <a href="#about" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">About</a>
-                <a href="#roadmap" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">Roadmap</a>
-                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-slate-700 hover:bg-indigo-100 dark:hover:bg-slate-600 transition">
-                    <span class="dark:hidden">🌙</span>
-                    <span class="hidden dark:inline">☀️</span>
-                </button>
-            </div>
-
-            <div class="md:hidden flex items-center space-x-4">
-                <button id="theme-toggle-mobile" class="p-2 text-xl">🌙</button>
-                <button id="menu-button" class="focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </button>
+<body class="bg-gray-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100 font-sans">
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm shadow-md transition duration-300">
+        <nav class="container mx-auto flex flex-wrap items-center justify-between gap-4 px-6 py-4">
+            <a href="#hero" class="flex items-center gap-3 text-xl font-bold text-slate-900 dark:text-white">
+                <span class="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-indigo-600 text-white">SR</span>
+                Academy
+            </a>
+            <div class="flex items-center gap-4 text-slate-700 dark:text-slate-300">
+                <a href="#details" class="transition hover:text-indigo-600">Details</a>
+                <a href="#payment" class="transition hover:text-indigo-600">Buy Now</a>
             </div>
         </nav>
-
-        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-800 border-t dark:border-slate-700">
-            <div class="flex flex-col p-6 space-y-4">
-                <a href="#hero" class="text-lg font-semibold">Home</a>
-                <a href="#courses" class="text-lg font-semibold">Courses</a>
-                <a href="#about" class="text-lg font-semibold">About</a>
-                <a href="#roadmap" class="text-lg font-semibold">Roadmap</a>
-            </div>
-        </div>
     </header>
 
     <main>
-        <section id="hero" class="relative bg-slate-900 text-white py-24 md:py-40 overflow-hidden">
-            <div class="absolute inset-0 opacity-20">
-                <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 to-transparent"></div>
-            </div>
-            <div class="container mx-auto px-6 text-center relative z-10">
-                <h1 class="text-5xl md:text-7xl font-black mb-6 animate-fade-in-up tracking-tight">
-                    Master the <span class="text-indigo-400">Modern</span> Stack
-                </h1>
-                <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto opacity-0 animate-fade-in-up delay-300 text-slate-300">
-                    High-performance training in Data Science, Engineering, and QA. Built by industry leads for future experts.
-                </p>
-                <div class="flex flex-col md:flex-row justify-center gap-4 opacity-0 animate-fade-in-up delay-600">
-                    <a href="#courses" class="bg-indigo-600 hover:bg-indigo-700 px-10 py-4 rounded-xl font-bold text-lg transition transform hover:-translate-y-1">
-                        Explore Courses
-                    </a>
-                    <a href="#enquiry" class="bg-white/10 hover:bg-white/20 backdrop-blur-md px-10 py-4 rounded-xl font-bold text-lg border border-white/20 transition">
-                        Get in Touch
-                    </a>
+        <section id="hero" class="relative overflow-hidden bg-slate-900 text-white py-24 sm:py-32">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(99,102,241,0.35),_transparent_45%)]"></div>
+            <div class="container mx-auto relative px-6 text-center">
+                <span class="inline-flex rounded-full bg-emerald-500/20 px-4 py-2 text-sm uppercase tracking-[0.24em] text-emerald-200 mb-6">Recorded course • One-time fee</span>
+                <h1 class="text-5xl font-extrabold tracking-tight text-white md:text-6xl">Complete Azure Data Engineering Bundle</h1>
+                <p class="mx-auto mt-6 max-w-3xl text-lg leading-8 text-slate-300">Buy the complete bundle for <strong>₹399</strong>. After payment, fill in your details and get the Drive link by email. Includes recorded course, Python scripts, interview prep, and DSA concepts.</p>
+                <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                    <button id="start-enroll" class="rounded-full bg-indigo-600 px-8 py-4 text-lg font-semibold text-white transition hover:bg-indigo-700">Pay ₹399 & Enroll</button>
+                    <a href="#details" class="rounded-full border border-white/20 bg-white/10 px-8 py-4 text-lg font-semibold text-white transition hover:bg-white/20">Course Details</a>
                 </div>
             </div>
         </section>
 
-        <section id="courses" class="py-20 bg-gray-50 dark:bg-slate-900">
+        <section id="details" class="bg-gray-50 dark:bg-slate-900 py-20">
             <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-5xl font-bold mb-4">Core Disciplines</h2>
-                    <div class="h-1.5 w-20 bg-indigo-600 mx-auto rounded-full"></div>
-                </div>
-                
-                <div class="grid md:grid-cols-2 gap-10">
-                    <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl border border-transparent hover:border-indigo-500 transition-all group">
-                        <div class="w-16 h-16 bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center rounded-2xl mb-6 group-hover:scale-110 transition">
-                            <span class="text-3xl">⚙️</span>
+                <div class="grid gap-10 lg:grid-cols-[1.3fr_0.9fr] items-center">
+                    <div>
+                        <p class="text-indigo-600 uppercase tracking-[0.3em] mb-4 text-sm font-semibold">What you'll receive</p>
+                        <h2 class="text-4xl font-bold text-slate-900 dark:text-white mb-6">Complete Azure Data Engineering Bundle</h2>
+                        <p class="text-slate-600 dark:text-slate-300 leading-8 mb-8">This complete package includes recorded Azure data engineering sessions, Python tutorial scripts with real examples, interview preparation notes, 200+ common SQL queries for interviews, and DSA concepts. Everything you need to master data engineering and prepare for top interviews.</p>
+                        <div class="grid gap-4 sm:grid-cols-3">
+                            <div class="rounded-3xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+                                <h3 class="font-semibold text-slate-900 dark:text-white mb-3">Azure Data Engineering</h3>
+                                <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm">
+                                    <li>• Azure Data Factory</li>
+                                    <li>• Synapse & Databricks</li>
+                                    <li>• Storage + SQL</li>
+                                    <li>• ETL pipeline design</li>
+                                </ul>
+                            </div>
+                            <div class="rounded-3xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+                                <h3 class="font-semibold text-slate-900 dark:text-white mb-3">Python Bundle with Scripts</h3>
+                                <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm">
+                                    <li>• ETL examples using pandas</li>
+                                    <li>• Azure SDK usage snippets</li>
+                                    <li>• Data cleaning & transformation scripts</li>
+                                    <li>• Sample pipeline automation scripts</li>
+                                </ul>
+                            </div>
+                            <div class="rounded-3xl bg-white dark:bg-slate-800 p-6 shadow-sm border border-slate-200 dark:border-slate-700">
+                                <h3 class="font-semibold text-slate-900 dark:text-white mb-3">Interview Kit + DSA</h3>
+                                <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm">
+                                    <li>• 200+ common SQL queries for interviews</li>
+                                    <li>• Notes for common questions in FAANG interviews</li>
+                                    <li>• DSA concepts for data engineering</li>
+                                    <li>• System design & performance optimization</li>
+                                </ul>
+                            </div>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">GCP Data Engineering With AI</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">Build scalable pipelines, master cloud architecture (GCP/Azure), and optimize Big Data workflows.</p>
-                        <a href="https://docs.google.com/document/d/19pfKRF9DzQxhJobd3kEW_p4_sxXkwd4V/edit?usp=sharing&ouid=107855144102577204459&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-bold flex items-center gap-2">
-                            Curriculum Details <span>→</span>
-                        </a>
                     </div>
-
-                    <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl border border-transparent hover:border-indigo-500 transition-all group">
-                        <div class="w-16 h-16 bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center rounded-2xl mb-6 group-hover:scale-110 transition">
-                            <span class="text-3xl">✅</span>
+                    <div class="rounded-[32px] bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-100 dark:border-indigo-700 p-10">
+                        <p class="text-sm uppercase tracking-[0.3em] text-indigo-600 mb-4">Complete bundle</p>
+                        <div class="text-5xl font-bold text-slate-900 dark:text-white">₹399</div>
+                        <p class="mt-3 text-slate-600 dark:text-slate-300">One-time payment for full recorded access</p>
+                        <div class="mt-8 space-y-4 text-slate-700 dark:text-slate-300 text-sm leading-7">
+                            <p>✅ Recorded course videos</p>
+                            <p>✅ Python scripts & interview kit</p>
+                            <p>✅ SQL queries & DSA concepts included</p>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3">QA</h3>
-                        <p class="text-gray-600 dark:text-gray-400 mb-6">Master automation testing, CI/CD integration, and high-performance software reliability.</p>
-                        <a href="#" class="text-indigo-600 dark:text-indigo-400 font-bold flex items-center gap-2">
-                            Curriculum Details <span>→</span>
-                        </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="enquiry" class="py-20 bg-white dark:bg-slate-900">
+        <section id="payment" class="py-20 bg-white dark:bg-slate-900">
             <div class="container mx-auto px-6">
-                <div class="max-w-3xl mx-auto bg-slate-100 dark:bg-slate-800 rounded-3xl p-10 shadow-xl border border-slate-200 dark:border-slate-700">
-                    <div class="mb-8 text-center">
-                        <p class="text-indigo-600 dark:text-indigo-400 uppercase font-semibold tracking-widest mb-2">Enquiry</p>
-                        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">Send us your details</h2>
-                        <p class="text-slate-600 dark:text-slate-300 mt-3">Share your name, phone number, and email so we can contact you about our courses.</p>
+                <div class="mx-auto max-w-2xl rounded-[32px] border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 shadow-xl overflow-hidden">
+                    <div class="p-10">
+                        <h2 class="text-3xl font-bold text-slate-900 dark:text-white mb-4">Enrollment form</h2>
+                        <p class="text-slate-600 dark:text-slate-300 leading-7 mb-8">Fill in your details and click Pay ₹399. You will receive the Drive link by email after payment.</p>
+                        
+                        <div id="enroll-panel" class="space-y-6">
+                            <form id="enroll-form" class="space-y-5">
+                                <label class="block">
+                                    <span class="text-slate-700 dark:text-slate-200">Name</span>
+                                    <input type="text" name="name" required class="mt-3 w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-4 py-3 text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-indigo-300" />
+                                </label>
+                                <label class="block">
+                                    <span class="text-slate-700 dark:text-slate-200">Email</span>
+                                    <input type="email" name="email" required class="mt-3 w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-4 py-3 text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-indigo-300" />
+                                </label>
+                                <label class="block">
+                                    <span class="text-slate-700 dark:text-slate-200">Phone</span>
+                                    <input type="tel" name="phone" required class="mt-3 w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-4 py-3 text-slate-900 dark:text-white outline-none focus:ring-2 focus:ring-indigo-300" />
+                                </label>
+                                <input type="hidden" name="paymentId" value="" />
+                                <button type="button" id="pay-button" class="w-full rounded-2xl bg-indigo-600 px-6 py-4 text-lg font-semibold text-white hover:bg-indigo-700 transition">Pay ₹399</button>
+                            </form>
+                            <p id="payment-help" class="text-sm text-slate-500 dark:text-slate-400">Your details will be submitted after payment, and the Drive link will be emailed to you.</p>
+                        </div>
+                        
+                        <div id="success-panel" class="hidden rounded-3xl bg-emerald-50 dark:bg-emerald-900/10 p-6 border border-emerald-200 dark:border-emerald-700">
+                            <h3 class="text-2xl font-bold text-emerald-900 dark:text-white">Enrollment submitted</h3>
+                            <p class="mt-3 text-slate-700 dark:text-slate-200">Thanks! Your details are received. Please check your inbox for the course link.</p>
+                        </div>
                     </div>
-                    <form id="enquiry-form" class="grid gap-6">
-                        <label class="block">
-                            <span class="text-slate-700 dark:text-slate-200 font-medium">Name</span>
-                            <input type="text" name="name" placeholder="Your full name" class="mt-2 w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3 text-slate-900 dark:text-slate-100 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-500/20" />
-                        </label>
-                        <label class="block">
-                            <span class="text-slate-700 dark:text-slate-200 font-medium">Phone Number</span>
-                            <input type="tel" name="phone" placeholder="Your phone number" class="mt-2 w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3 text-slate-900 dark:text-slate-100 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-500/20" />
-                        </label>
-                        <label class="block">
-                            <span class="text-slate-700 dark:text-slate-200 font-medium">Email ID</span>
-                            <input type="email" name="email" placeholder="Your email address" class="mt-2 w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3 text-slate-900 dark:text-slate-100 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-500/20" />
-                        </label>
-                        <button type="submit" class="w-full inline-flex justify-center rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 transition">Submit Enquiry</button>
-                    </form>
                 </div>
             </div>
         </section>
+    </main>
 
-        </main>
-
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-        <div class="container mx-auto px-6 text-center">
-            <img src="logo.png" alt="SR Academy Logo" class="h-8 mx-auto mb-4 grayscale opacity-50">
-            <p class="mb-4">&copy; 2026 SR Academy. Professional Tech Education.</p>
-            <div class="flex justify-center space-x-6">
-                <a href="#" class="hover:text-white transition">LinkedIn</a>
-                <a href="#" class="hover:text-white transition">GitHub</a>
-                <a href="#" class="hover:text-white transition">Twitter</a>
-            </div>
-        </div>
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800">
+        <div class="container mx-auto px-6 text-center text-sm">© 2026 HSR Academy. Complete Azure Data Engineering Bundle.</div>
     </footer>
 
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script>
-        // Updated Toggle Logic
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
-        const htmlElement = document.documentElement;
+        const payButton = document.getElementById('pay-button');
+        const enrollPanel = document.getElementById('enroll-panel');
+        const successPanel = document.getElementById('success-panel');
+        const enrollForm = document.getElementById('enroll-form');
+        const paymentHelp = document.getElementById('payment-help');
+        const startEnroll = document.getElementById('start-enroll');
+        const paymentIdInput = enrollForm.querySelector('input[name="paymentId"]');
 
-        function updateTheme() {
-            if (htmlElement.classList.contains('dark')) {
-                htmlElement.classList.remove('dark');
-                localStorage.theme = 'light';
-                themeToggle.innerHTML = '🌙';
-            } else {
-                htmlElement.classList.add('dark');
-                localStorage.theme = 'dark';
-                themeToggle.innerHTML = '☀️';
-            }
-        }
+        const razorpayKey = 'YOUR_RAZORPAY_KEY_HERE';
+        const emailEndpoint = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
 
-        themeToggle.addEventListener('click', updateTheme);
-        themeToggleMobile.addEventListener('click', updateTheme);
-
-        // Mobile Menu
-        const menuBtn = document.getElementById('menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-
-        // Enquiry Form Submission
-        document.getElementById('enquiry-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const data = {
+        function submitFormData(paymentId) {
+            const formData = new FormData(enrollForm);
+            const payload = {
                 name: formData.get('name'),
+                email: formData.get('email'),
                 phone: formData.get('phone'),
-                email: formData.get('email')
+                paymentId: paymentId || 'manual-payment',
+                course: 'Complete Azure Data Engineering Bundle'
             };
-            fetch('https://script.google.com/macros/s/AKfycbzh1CD_usqsJziYL7-77AoS479B3ahn6wHVHHpNNhvQCd2xmYNK91tidnry5DuAntTlqg/exec', {
+
+            fetch(emailEndpoint, {
                 method: 'POST',
-                body: JSON.stringify(data)
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
             })
             .then(response => response.json())
             .then(result => {
-                if (result.result === 'success') {
-                    alert('Enquiry submitted successfully!');
-                    e.target.reset();
+                if (result.success || result.status === 'OK') {
+                    enrollPanel.classList.add('hidden');
+                    successPanel.classList.remove('hidden');
                 } else {
-                    alert('Error: ' + result.message);
+                    paymentHelp.textContent = 'There was an issue sending your details. Please try again or contact support.';
                 }
             })
-            .catch(error => {
-                alert('Error submitting enquiry: ' + error);
+            .catch(() => {
+                paymentHelp.textContent = 'Network error: unable to send details. Please try again later.';
             });
+        }
+
+        function openRazorpayCheckout() {
+            if (razorpayKey.includes('YOUR_')) {
+                // If no real key, submit form directly
+                submitFormData('manual-payment');
+                paymentHelp.textContent = 'Replace the placeholder key with your real Razorpay key to enable live payment checkout.';
+                return;
+            }
+
+            const options = {
+                key: razorpayKey,
+                amount: 39900,
+                currency: 'INR',
+                name: 'SR Academy',
+                description: 'Complete Azure Data Engineering Bundle',
+                handler: function(response) {
+                    submitFormData(response.razorpay_payment_id);
+                },
+                prefill: { 
+                    name: enrollForm.querySelector('input[name="name"]').value,
+                    email: enrollForm.querySelector('input[name="email"]').value,
+                    contact: enrollForm.querySelector('input[name="phone"]').value
+                },
+                theme: { color: '#6366f1' }
+            };
+
+            const razorpay = new Razorpay(options);
+            razorpay.open();
+        }
+
+        payButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (enrollForm.checkValidity()) {
+                openRazorpayCheckout();
+            } else {
+                paymentHelp.textContent = 'Please fill in all fields before proceeding.';
+            }
+        });
+
+        startEnroll.addEventListener('click', () => {
+            document.getElementById('payment').scrollIntoView({ behavior: 'smooth', block: 'start' });
         });
     </script>
 </body>
