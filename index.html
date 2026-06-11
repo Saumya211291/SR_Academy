@@ -230,38 +230,6 @@
             return response.json();
         }
 
-        function submitFormData(paymentId) {
-            const formData = new FormData(enrollForm);
-            const payload = {
-                name: formData.get('name'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                paymentId,
-                course: 'Complete Azure Data Engineering Bundle'
-            };
-
-            // Replace this endpoint with your own backend email submission service if required.
-            const emailEndpoint = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
-
-            fetch(emailEndpoint, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            })
-            .then(response => response.json())
-            .then(result => {
-                if (result.success || result.status === 'OK') {
-                    enrollPanel.classList.add('hidden');
-                    successPanel.classList.remove('hidden');
-                } else {
-                    paymentHelp.textContent = 'There was an issue sending your details. Please try again or contact support.';
-                }
-            })
-            .catch(() => {
-                paymentHelp.textContent = 'Network error: unable to send details. Please try again later.';
-            });
-        }
-
         async function openRazorpayCheckout() {
             try {
                 const keyId = await fetchRazorpayKey();
@@ -276,8 +244,17 @@
                     description: 'Complete Azure Data Engineering Bundle',
                     handler: async function(response) {
                         try {
-                            await verifyPayment(response);
-                            submitFormData(response.razorpay_payment_id);
+                            paymentHelp.textContent = 'Payment completed. Sending confirmation email...';
+                            const payload = Object.assign({}, response, {
+                                name: enrollForm.querySelector('input[name="name"]').value,
+                                email: enrollForm.querySelector('input[name="email"]').value,
+                                phone: enrollForm.querySelector('input[name="phone"]').value
+                            });
+
+                            await verifyPayment(payload);
+                            enrollPanel.classList.add('hidden');
+                            successPanel.classList.remove('hidden');
+                            paymentHelp.textContent = 'Payment confirmed. Check your inbox for email confirmation.';
                         } catch (verifyError) {
                             paymentHelp.textContent = verifyError.message;
                         }

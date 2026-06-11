@@ -23,6 +23,76 @@ const razorpay = new Razorpay({
   key_secret: RAZORPAY_KEY_SECRET
 });
 
+const nodemailer = require('nodemailer');
+
+function createTransporter() {
+  const host = process.env.SMTP_HOST || 'smtp.gmail.com';
+  const port = Number(process.env.SMTP_PORT || 465);
+  const secure = process.env.SMTP_SECURE ? process.env.SMTP_SECURE === 'true' : port === 465;
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+
+  if (!user || !pass) {
+    return null;
+  }
+
+  return nodemailer.createTransport({
+    host,
+    port,
+    secure,
+    auth: { user, pass }
+  });
+}
+
+const smtpTransporter = createTransporter();
+
+async function verifySmtpTransporter() {
+  if (!smtpTransporter) {
+    console.warn('SMTP transporter is not configured. Email sending will fail.');
+    return;
+  }
+
+  try {
+    await smtpTransporter.verify();
+    console.log('SMTP transporter verified successfully.');
+  } catch (error) {
+    console.error('SMTP transporter verification failed:', error && error.message ? error.message : error);
+  }
+}
+
+async function sendEnrollmentEmail({ to, name, orderId, paymentId }) {
+  if (!smtpTransporter) {
+    throw new Error('SMTP credentials are missing or invalid. Email cannot be sent.');
+  }
+
+  const from = process.env.EMAIL_FROM || process.env.SMTP_USER;
+  const driveLink = process.env.COURSE_DRIVE_LINK || 'https://your-drive-link.example.com';
+
+  const html = `
+    <p>Hi ${name || 'Student'},</p>
+    <p>Thanks for your payment. Your order <strong>${orderId}</strong> was successful (payment id: <code>${paymentId}</code>).</p>
+    <p>Access the course here: <a href="${driveLink}">${driveLink}</a></p>
+    <p>Regards,<br/>SR Academy</p>
+  `;
+
+  const text = `Hi ${name || 'Student'},\n\nThanks for your payment. Your order ${orderId} was successful (payment id: ${paymentId}).\n\nAccess the course here: ${driveLink}\n\nRegards,\nSR Academy`;
+
+  console.log(`Sending enrollment email to ${to} from ${from}`);
+  const info = await smtpTransporter.sendMail({
+    from,
+    to,
+    subject: 'Your SR Academy course access',
+    text,
+    html
+  });
+  console.log('Enrollment email send info:', {
+    messageId: info.messageId,
+    accepted: info.accepted,
+    rejected: info.rejected,
+    response: info.response
+  });
+}
+
 app.get('/api/razorpay-key', (req, res) => {
   return res.json({ keyId: RAZORPAY_KEY_ID });
 });
@@ -52,8 +122,8 @@ app.post('/api/create-order', async (req, res) => {
   }
 });
 
-app.post('/api/verify-payment', (req, res) => {
-  const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = req.body;
+app.post('/api/verify-payment', async (req, res) => {
+  const { razorpay_order_id, razorpay_payment_id, razorpay_signature, name, email, phone } = req.body;
 
   if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
     return res.status(400).json({ error: 'Missing required payment fields.' });
@@ -68,6 +138,25 @@ app.post('/api/verify-payment', (req, res) => {
     return res.status(400).json({ error: 'Signature verification failed.' });
   }
 
+  console.log('Verify payment request payload:', {
+    orderId: razorpay_order_id,
+    paymentId: razorpay_payment_id,
+    name,
+    email,
+    phone
+  });
+
+  try {
+    if (email) {
+      await sendEnrollmentEmail({ to: email, name, orderId: razorpay_order_id, paymentId: razorpay_payment_id });
+    } else {
+      console.warn('No email provided; skipping sending enrollment email');
+    }
+  } catch (err) {
+    console.error('Error sending enrollment email:', err);
+    return res.status(500).json({ error: 'Payment verified but email delivery failed.' });
+  }
+
   return res.json({ success: true, razorpay_order_id, razorpay_payment_id });
 });
 
@@ -76,6 +165,13 @@ app.get(/.*/, (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`Server listening on http://localhost:${port}`);
+verifySmtpTransporter().then(() => {
+  app.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
+  });
+}).catch((error) => {
+  console.error('Failed to verify SMTP transporter at startup:', error);
+  app.listen(port, () => {
+    console.log(`Server listening on http://localhost:${port}`);
+  });
 });
