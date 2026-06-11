@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SR Academy | Data & QA Excellence</title>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        },
+                        indigo: {
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                        },
+                        emerald: {
+                            500: '#10b981',
+                            600: '#059669',
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-600 { animation-delay: 0.6s; }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-slate-900 text-gray-900 dark:text-gray-100 font-sans">
+
+    <header class="sticky top-0 z-50 bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm shadow-md transition-colors duration-300">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="logo.png" alt="SR logo" class="h-10 w-auto md:h-12 object-contain bg-white rounded p-0.5">
+                <a href="#" class="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    Academy
+                </a>
+            </div>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#hero" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">Home</a>
+                <a href="#courses" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">Courses</a>
+                <a href="#about" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">About</a>
+                <a href="#roadmap" class="font-medium hover:text-indigo-600 dark:hover:text-indigo-400 transition">Roadmap</a>
+                <button id="theme-toggle" class="p-2 rounded-lg bg-gray-100 dark:bg-slate-700 hover:bg-indigo-100 dark:hover:bg-slate-600 transition">
+                    <span class="dark:hidden">🌙</span>
+                    <span class="hidden dark:inline">☀️</span>
+                </button>
+            </div>
+
+            <div class="md:hidden flex items-center space-x-4">
+                <button id="theme-toggle-mobile" class="p-2 text-xl">🌙</button>
+                <button id="menu-button" class="focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </nav>
+
+        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-slate-800 border-t dark:border-slate-700">
+            <div class="flex flex-col p-6 space-y-4">
+                <a href="#hero" class="text-lg font-semibold">Home</a>
+                <a href="#courses" class="text-lg font-semibold">Courses</a>
+                <a href="#about" class="text-lg font-semibold">About</a>
+                <a href="#roadmap" class="text-lg font-semibold">Roadmap</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="relative bg-slate-900 text-white py-24 md:py-40 overflow-hidden">
+            <div class="absolute inset-0 opacity-20">
+                <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 to-transparent"></div>
+            </div>
+            <div class="container mx-auto px-6 text-center relative z-10">
+                <h1 class="text-5xl md:text-7xl font-black mb-6 animate-fade-in-up tracking-tight">
+                    Master the <span class="text-indigo-400">Modern</span> Stack
+                </h1>
+                <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto opacity-0 animate-fade-in-up delay-300 text-slate-300">
+                    High-performance training in Data Science, Engineering, and QA. Built by industry leads for future experts.
+                </p>
+                <div class="flex flex-col md:flex-row justify-center gap-4 opacity-0 animate-fade-in-up delay-600">
+                    <a href="#courses" class="bg-indigo-600 hover:bg-indigo-700 px-10 py-4 rounded-xl font-bold text-lg transition transform hover:-translate-y-1">
+                        Explore Courses
+                    </a>
+                    <a href="#enquiry" class="bg-white/10 hover:bg-white/20 backdrop-blur-md px-10 py-4 rounded-xl font-bold text-lg border border-white/20 transition">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="courses" class="py-20 bg-gray-50 dark:bg-slate-900">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-5xl font-bold mb-4">Core Disciplines</h2>
+                    <div class="h-1.5 w-20 bg-indigo-600 mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-10">
+                    <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl border border-transparent hover:border-indigo-500 transition-all group">
+                        <div class="w-16 h-16 bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center rounded-2xl mb-6 group-hover:scale-110 transition">
+                            <span class="text-3xl">⚙️</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">GCP Data Engineering With AI</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">Build scalable pipelines, master cloud architecture (GCP/Azure), and optimize Big Data workflows.</p>
+                        <a href="https://docs.google.com/document/d/19pfKRF9DzQxhJobd3kEW_p4_sxXkwd4V/edit?usp=sharing&ouid=107855144102577204459&rtpof=true&sd=true" target="_blank" rel="noopener noreferrer" class="text-indigo-600 dark:text-indigo-400 font-bold flex items-center gap-2">
+                            Curriculum Details <span>→</span>
+                        </a>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl border border-transparent hover:border-indigo-500 transition-all group">
+                        <div class="w-16 h-16 bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center rounded-2xl mb-6 group-hover:scale-110 transition">
+                            <span class="text-3xl">✅</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-3">QA</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6">Master automation testing, CI/CD integration, and high-performance software reliability.</p>
+                        <a href="#" class="text-indigo-600 dark:text-indigo-400 font-bold flex items-center gap-2">
+                            Curriculum Details <span>→</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="enquiry" class="py-20 bg-white dark:bg-slate-900">
+            <div class="container mx-auto px-6">
+                <div class="max-w-3xl mx-auto bg-slate-100 dark:bg-slate-800 rounded-3xl p-10 shadow-xl border border-slate-200 dark:border-slate-700">
+                    <div class="mb-8 text-center">
+                        <p class="text-indigo-600 dark:text-indigo-400 uppercase font-semibold tracking-widest mb-2">Enquiry</p>
+                        <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">Send us your details</h2>
+                        <p class="text-slate-600 dark:text-slate-300 mt-3">Share your name, phone number, and email so we can contact you about our courses.</p>
+                    </div>
+                    <form id="enquiry-form" class="grid gap-6">
+                        <label class="block">
+                            <span class="text-slate-700 dark:text-slate-200 font-medium">Name</span>
+                            <input type="text" name="name" placeholder="Your full name" class="mt-2 w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3 text-slate-900 dark:text-slate-100 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-500/20" />
+                        </label>
+                        <label class="block">
+                            <span class="text-slate-700 dark:text-slate-200 font-medium">Phone Number</span>
+                            <input type="tel" name="phone" placeholder="Your phone number" class="mt-2 w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3 text-slate-900 dark:text-slate-100 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-500/20" />
+                        </label>
+                        <label class="block">
+                            <span class="text-slate-700 dark:text-slate-200 font-medium">Email ID</span>
+                            <input type="email" name="email" placeholder="Your email address" class="mt-2 w-full rounded-2xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 px-4 py-3 text-slate-900 dark:text-slate-100 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200 dark:focus:ring-indigo-500/20" />
+                        </label>
+                        <button type="submit" class="w-full inline-flex justify-center rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-3 transition">Submit Enquiry</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        </main>
+
+    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+        <div class="container mx-auto px-6 text-center">
+            <img src="logo.png" alt="SR Academy Logo" class="h-8 mx-auto mb-4 grayscale opacity-50">
+            <p class="mb-4">&copy; 2026 SR Academy. Professional Tech Education.</p>
+            <div class="flex justify-center space-x-6">
+                <a href="#" class="hover:text-white transition">LinkedIn</a>
+                <a href="#" class="hover:text-white transition">GitHub</a>
+                <a href="#" class="hover:text-white transition">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Updated Toggle Logic
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+        const htmlElement = document.documentElement;
+
+        function updateTheme() {
+            if (htmlElement.classList.contains('dark')) {
+                htmlElement.classList.remove('dark');
+                localStorage.theme = 'light';
+                themeToggle.innerHTML = '🌙';
+            } else {
+                htmlElement.classList.add('dark');
+                localStorage.theme = 'dark';
+                themeToggle.innerHTML = '☀️';
+            }
+        }
+
+        themeToggle.addEventListener('click', updateTheme);
+        themeToggleMobile.addEventListener('click', updateTheme);
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        // Enquiry Form Submission
+        document.getElementById('enquiry-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = {
+                name: formData.get('name'),
+                phone: formData.get('phone'),
+                email: formData.get('email')
+            };
+            fetch('https://script.google.com/macros/s/AKfycbzh1CD_usqsJziYL7-77AoS479B3ahn6wHVHHpNNhvQCd2xmYNK91tidnry5DuAntTlqg/exec', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.result === 'success') {
+                    alert('Enquiry submitted successfully!');
+                    e.target.reset();
+                } else {
+                    alert('Error: ' + result.message);
+                }
+            })
+            .catch(error => {
+                alert('Error submitting enquiry: ' + error);
+            });
+        });
+    </script>
+</body>
+</html>
