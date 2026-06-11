@@ -183,8 +183,52 @@
         const startEnroll = document.getElementById('start-enroll');
         const paymentIdInput = enrollForm.querySelector('input[name="paymentId"]');
 
-        const razorpayKey = 'YOUR_RAZORPAY_KEY_HERE';
-        const emailEndpoint = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+        const serverBase = window.location.protocol.startsWith('http') ? window.location.origin : '';
+
+        async function fetchRazorpayKey() {
+            if (!serverBase) {
+                paymentHelp.textContent = 'Please access this page through http://localhost:3000 after running npm start.';
+                throw new Error('Page must be served over HTTP to reach backend API.');
+            }
+            try {
+                const response = await fetch(`${serverBase}/api/razorpay-key`);
+                const data = await response.json();
+                return data.keyId;
+            } catch (error) {
+                paymentHelp.textContent = 'Unable to load payment configuration. Please try again later.';
+                throw error;
+            }
+        }
+
+        async function createOrder(amountPaise) {
+            const response = await fetch(`${serverBase}/api/create-order`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount: amountPaise, currency: 'INR', receipt: `sr-academy-${Date.now()}` })
+            });
+
+            if (!response.ok) {
+                const error = await response.json().catch(() => ({ error: 'Order creation failed.' }));
+                throw new Error(error.error || 'Unable to create order.');
+            }
+
+            return response.json();
+        }
+
+        async function verifyPayment(payload) {
+            const response = await fetch(`${serverBase}/api/verify-payment`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const error = await response.json().catch(() => ({ error: 'Verification failed.' }));
+                throw new Error(error.error || 'Payment verification failed.');
+            }
+
+            return response.json();
+        }
 
         function submitFormData(paymentId) {
             const formData = new FormData(enrollForm);
@@ -192,9 +236,12 @@
                 name: formData.get('name'),
                 email: formData.get('email'),
                 phone: formData.get('phone'),
-                paymentId: paymentId || 'manual-payment',
+                paymentId,
                 course: 'Complete Azure Data Engineering Bundle'
             };
+
+            // Replace this endpoint with your own backend email submission service if required.
+            const emailEndpoint = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
 
             fetch(emailEndpoint, {
                 method: 'POST',
@@ -215,38 +262,53 @@
             });
         }
 
-        function openRazorpayCheckout() {
-            if (razorpayKey.includes('YOUR_')) {
-                // If no real key, submit form directly
-                submitFormData('manual-payment');
-                paymentHelp.textContent = 'Replace the placeholder key with your real Razorpay key to enable live payment checkout.';
-                return;
+        async function openRazorpayCheckout() {
+            try {
+                const keyId = await fetchRazorpayKey();
+                const order = await createOrder(39900);
+
+                const options = {
+                    key: keyId,
+                    amount: order.amount,
+                    currency: order.currency,
+                    order_id: order.order_id,
+                    name: 'SR Academy',
+                    description: 'Complete Azure Data Engineering Bundle',
+                    handler: async function(response) {
+                        try {
+                            await verifyPayment(response);
+                            submitFormData(response.razorpay_payment_id);
+                        } catch (verifyError) {
+                            paymentHelp.textContent = verifyError.message;
+                        }
+                    },
+                    modal: {
+                        ondismiss: function() {
+                            paymentHelp.textContent = 'Payment cancelled. You can try again when ready.';
+                        }
+                    },
+                    prefill: {
+                        name: enrollForm.querySelector('input[name="name"]').value,
+                        email: enrollForm.querySelector('input[name="email"]').value,
+                        contact: enrollForm.querySelector('input[name="phone"]').value
+                    },
+                    theme: { color: '#6366f1' }
+                };
+
+                const razorpay = new Razorpay(options);
+                razorpay.on('payment.failed', function(response) {
+                    paymentHelp.textContent = response.error.description || 'Payment failed. Please try again.';
+                });
+                razorpay.open();
+            } catch (error) {
+                paymentHelp.textContent = error.message || 'Unable to start payment flow.';
             }
-
-            const options = {
-                key: razorpayKey,
-                amount: 39900,
-                currency: 'INR',
-                name: 'SR Academy',
-                description: 'Complete Azure Data Engineering Bundle',
-                handler: function(response) {
-                    submitFormData(response.razorpay_payment_id);
-                },
-                prefill: { 
-                    name: enrollForm.querySelector('input[name="name"]').value,
-                    email: enrollForm.querySelector('input[name="email"]').value,
-                    contact: enrollForm.querySelector('input[name="phone"]').value
-                },
-                theme: { color: '#6366f1' }
-            };
-
-            const razorpay = new Razorpay(options);
-            razorpay.open();
         }
 
         payButton.addEventListener('click', function(e) {
             e.preventDefault();
             if (enrollForm.checkValidity()) {
+                paymentHelp.textContent = 'Initializing payment...';
                 openRazorpayCheckout();
             } else {
                 paymentHelp.textContent = 'Please fill in all fields before proceeding.';
