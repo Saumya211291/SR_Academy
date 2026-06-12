@@ -61,11 +61,7 @@ async function verifySmtpTransporter() {
 }
 
 async function sendEnrollmentEmail({ to, name, orderId, paymentId }) {
-  if (!smtpTransporter) {
-    throw new Error('SMTP credentials are missing or invalid. Email cannot be sent.');
-  }
-
-  const from = process.env.EMAIL_FROM || process.env.SMTP_USER;
+  const from = process.env.EMAIL_FROM || process.env.SMTP_USER || 'SR Academy <no-reply@sr-academy.example>';
   const driveLink = process.env.COURSE_DRIVE_LINK || 'https://your-drive-link.example.com';
 
   const html = `
@@ -77,20 +73,53 @@ async function sendEnrollmentEmail({ to, name, orderId, paymentId }) {
 
   const text = `Hi ${name || 'Student'},\n\nThanks for your payment. Your order ${orderId} was successful (payment id: ${paymentId}).\n\nAccess the course here: ${driveLink}\n\nRegards,\nSR Academy`;
 
-  console.log(`Sending enrollment email to ${to} from ${from}`);
-  const info = await smtpTransporter.sendMail({
-    from,
-    to,
-    subject: 'Your SR Academy course access',
-    text,
-    html
-  });
-  console.log('Enrollment email send info:', {
-    messageId: info.messageId,
-    accepted: info.accepted,
-    rejected: info.rejected,
-    response: info.response
-  });
+  // If SENDGRID_API_KEY is configured, prefer the SendGrid Web API (works from hosts blocking SMTP)
+  if (process.env.SENDGRID_API_KEY) {
+    try {
+      const sgMail = require('@sendgrid/mail');
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+      const msg = {
+        to,
+        from,
+        subject: 'Your SR Academy course access',
+        text,
+        html
+      };
+      console.log(`Sending enrollment email via SendGrid to ${to}`);
+      const response = await sgMail.send(msg);
+      console.log('SendGrid response status:', response && response[0] && response[0].statusCode);
+      return response;
+    } catch (err) {
+      console.error('SendGrid send failed:', err && err.message ? err.message : err);
+      throw err;
+    }
+  }
+
+  // Fallback to SMTP transporter if SendGrid not configured
+  if (!smtpTransporter) {
+    throw new Error('SMTP credentials are missing or invalid. Email cannot be sent. Consider setting SENDGRID_API_KEY to use SendGrid API.');
+  }
+
+  try {
+    console.log(`Sending enrollment email to ${to} from ${from} via SMTP`);
+    const info = await smtpTransporter.sendMail({
+      from,
+      to,
+      subject: 'Your SR Academy course access',
+      text,
+      html
+    });
+    console.log('Enrollment email send info:', {
+      messageId: info.messageId,
+      accepted: info.accepted,
+      rejected: info.rejected,
+      response: info.response
+    });
+    return info;
+  } catch (err) {
+    console.error('Error sending enrollment email:', err);
+    throw err;
+  }
 }
 
 app.get('/api/razorpay-key', (req, res) => {
@@ -162,6 +191,24 @@ app.post('/api/verify-payment', async (req, res) => {
 
 app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Test endpoint to trigger a confirmation email (helpful for debugging SMTP in production)
+app.post('/api/send-test-email', async (req, res) => {
+  const to = (req.body && req.body.to) || req.query.to;
+  if (!to) {
+    return res.status(400).json({ error: 'Missing `to` address. Provide JSON {"to":"you@domain.com"} or ?to=you@domain.com' });
+  }
+
+  try {
+    console.log(`Attempting test email to ${to}`);
+    await sendEnrollmentEmail({ to, name: 'Test Student', orderId: 'test_order', paymentId: 'test_payment' });
+    console.log(`Test email sent to ${to}`);
+    return res.json({ success: true, message: `Test email sent to ${to}` });
+  } catch (err) {
+    console.error('Test email failed:', err && err.message ? err.message : err);
+    return res.status(500).json({ error: 'Test email failed', details: err && err.message ? err.message : String(err) });
+  }
 });
 
 const port = process.env.PORT || 3000;
