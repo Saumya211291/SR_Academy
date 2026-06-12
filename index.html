@@ -183,11 +183,15 @@
         const startEnroll = document.getElementById('start-enroll');
         const paymentIdInput = enrollForm.querySelector('input[name="paymentId"]');
 
-        const serverBase = window.location.protocol.startsWith('http') ? window.location.origin : '';
+        const BACKEND_URL = 'https://YOUR_BACKEND_URL';
+        const serverBase = window.location.hostname === 'localhost'
+            ? window.location.origin
+            : BACKEND_URL;
 
         async function fetchRazorpayKey() {
-            if (!serverBase) {
-                paymentHelp.textContent = 'Please access this page through http://localhost:3000 after running npm start.';
+            if (!serverBase || serverBase.includes('YOUR_BACKEND_URL')) {
+                paymentHelp.textContent = 'Please set serverBase to your deployed backend URL in index.html, or run this page from localhost after starting the backend.';
+                throw new Error('Backend URL is not configured.');
                 throw new Error('Page must be served over HTTP to reach backend API.');
             }
             try {
@@ -274,7 +278,11 @@
 
                 const razorpay = new Razorpay(options);
                 razorpay.on('payment.failed', function(response) {
-                    paymentHelp.textContent = response.error.description || 'Payment failed. Please try again.';
+                    console.error('Razorpay payment.failed', response);
+                    const errorDetails = response.error
+                        ? `${response.error.code || 'UNKNOWN_ERROR'}: ${response.error.description || 'Payment failed. Please try another method or card.'}`
+                        : JSON.stringify(response, null, 2);
+                    paymentHelp.textContent = errorDetails;
                 });
                 razorpay.open();
             } catch (error) {
